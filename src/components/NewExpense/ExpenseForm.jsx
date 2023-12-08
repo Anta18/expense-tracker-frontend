@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Button, Center, HStack, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  HStack,
+  Input,
+  Text,
+  Stack,
+} from "@chakra-ui/react";
 import axios from "axios";
 
 const backendUrl = "https://expense-tracker-backend-zb4y.onrender.com";
@@ -40,7 +48,7 @@ const ExpenseForm = ({ onClick }) => {
         borderRadius={15}
         borderWidth="1px"
         padding={2}
-        width="80vw"
+        width="95%"
         alignItems="center"
         justifyContent="center"
       >
@@ -66,7 +74,11 @@ const ExpenseForm = ({ onClick }) => {
             }}
           />
         </HStack>
-        <HStack justifyContent={"center"} alignItems="center">
+        <Stack
+          justifyContent={"center"}
+          alignItems="center"
+          direction={{ base: "column", md: "row", lg: "row" }}
+        >
           <Text fontWeight="bold" color="black" fontSize="xl" paddingBottom={5}>
             Amount(Rs.):
           </Text>
@@ -100,7 +112,7 @@ const ExpenseForm = ({ onClick }) => {
               setDate(dates[2] + "-" + dates[1] + "-" + dates[0]);
             }}
           />
-        </HStack>
+        </Stack>
         <HStack justifyContent="center">
           <Button
             mt={8}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Input, Box, Flex, Button, HStack } from "@chakra-ui/react";
+import { Text, Input, Box, Flex, Button, HStack, Link } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -120,9 +120,11 @@ const Signup = () => {
           </Button>
         </HStack>
         {error && <Text color="red.500">{error}</Text>}
-        {/* <Link color="blue.300" as={RouterLink} to="/signup">
-          Don't have an account? Signup now
-        </Link> */}
+        {
+          <Link color="blue.300" as={RouterLink} to="/">
+            Already have an account? Login now
+          </Link>
+        }
       </Box>
     </Flex>
   );

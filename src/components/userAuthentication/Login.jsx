@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Input, Box, Flex, Button, HStack } from "@chakra-ui/react";
+import { Text, Input, Box, Flex, Button, HStack, Link } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -67,7 +67,7 @@ const Login = () => {
           borderRadius={20}
           placeholder="Email"
           variant="filled"
-          color="white"
+          color="#AB9696"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -81,7 +81,7 @@ const Login = () => {
           placeholder="Password"
           variant="filled"
           type="password"
-          color="white"
+          color="#AB9696"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -102,9 +102,11 @@ const Login = () => {
           </Button>
         </HStack>
         {error && <Text color="red.500">{error}</Text>}
-        {/* <Link color="blue.300" as={RouterLink} to="/signup">
-          Don't have an account? Signup now
-        </Link> */}
+        {
+          <Link color="blue.300" as={RouterLink} to="/signup">
+            Don't have an account? Signup now
+          </Link>
+        }
       </Box>
     </Flex>
   );
