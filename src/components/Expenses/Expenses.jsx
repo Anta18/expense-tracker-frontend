@@ -57,13 +57,17 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
     setCurrentYear(year);
   }, []);
   useEffect(() => {
-    setFilteredExpenses(
-      expenses.filter(
-        (expense) =>
-          expense.date.split("-")[2] == currentYear &&
-          months[parseInt(expense.date.split("-")[1]) - 1] == currentMonth
-      )
+    const temp = expenses.filter(
+      (expense) =>
+        expense.date.split("-")[2] == currentYear &&
+        months[parseInt(expense.date.split("-")[1]) - 1] == currentMonth
     );
+    const sortedExpenses = temp.sort((a, b) => {
+      const dateA = parseInt(a.date.split("-")[0]);
+      const dateB = parseInt(b.date.split("-")[0]);
+      return dateB - dateA;
+    });
+    setFilteredExpenses(sortedExpenses);
   }, [currentMonth, currentYear, expenses]);
   useEffect(() => {
     setTotalExpense(

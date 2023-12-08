@@ -129,8 +129,21 @@ const ExpenseForm = ({ onClick }) => {
             type="date"
             value={date}
             onChange={(e) => {
-              const dates = e.target.value.split("-");
-              setDate(dates[2] + "-" + dates[1] + "-" + dates[0]);
+              const inputDate = e.target.value;
+
+              const dateObject = new Date(inputDate);
+
+              if (!isNaN(dateObject.getTime())) {
+                const day = dateObject.getDate().toString().padStart(2, "0");
+                const month = (dateObject.getMonth() + 1)
+                  .toString()
+                  .padStart(2, "0"); // Months are zero-based
+                const year = dateObject.getFullYear().toString();
+                console.log("date ", `${day}-${month}-${year}`);
+                setDate(`${day}-${month}-${year}`);
+              } else {
+                console.error("Invalid date input");
+              }
             }}
           />
         </Stack>
