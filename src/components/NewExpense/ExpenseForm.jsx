@@ -44,6 +44,7 @@ const ExpenseForm = ({ onClick }) => {
   return (
     <Center>
       <Box
+        paddingTop={5}
         bg="#a892ee"
         borderRadius={15}
         borderWidth="1px"
