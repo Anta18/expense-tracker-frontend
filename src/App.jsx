@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react";
 
 function App() {
   return (
-    <Box h="100vh" w="100%" bg="black">
+    <Box minH="100vh" w="100%" bg="black" align="center">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
