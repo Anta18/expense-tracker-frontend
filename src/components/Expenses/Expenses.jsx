@@ -66,7 +66,7 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
     const sortedExpenses = temp.sort((a, b) => {
       const dateA = parseInt(a.date.split("-")[0]);
       const dateB = parseInt(b.date.split("-")[0]);
-      return dateB - dateA;
+      return dateA - dateB;
     });
     setFilteredExpenses(sortedExpenses);
     setOriginalFilteredExpenses(sortedExpenses);
