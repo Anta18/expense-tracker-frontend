@@ -9,6 +9,7 @@ const backendUrl = "https://expense-tracker-backend-zb4y.onrender.com";
 const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
   const token = localStorage.getItem("token");
   const [expenses, setExpenses] = useState([]);
+  const [originalFilteredExpenses, setOriginalFilteredExpenses] = useState([]);
   const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -44,7 +45,7 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
     "November",
     "December",
   ];
-
+  const [searchDate, setsearchDate] = useState("");
   const [currentMonth, setCurrentMonth] = useState("");
   const [currentYear, setCurrentYear] = useState("");
   const [totalExpense, setTotalExpense] = useState(0);
@@ -68,12 +69,24 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
       return dateB - dateA;
     });
     setFilteredExpenses(sortedExpenses);
+    setOriginalFilteredExpenses(sortedExpenses);
   }, [currentMonth, currentYear, expenses]);
   useEffect(() => {
     setTotalExpense(
       filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0)
     );
   }, [filteredExpenses]);
+  useEffect(() => {
+    if (searchDate) {
+      setFilteredExpenses(
+        originalFilteredExpenses.filter(
+          (expense) => parseInt(expense.date.split("-")[0]) == searchDate
+        )
+      );
+    } else {
+      setFilteredExpenses(originalFilteredExpenses);
+    }
+  }, [searchDate]);
   return (
     <Center>
       <Box
@@ -91,6 +104,7 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
           currentYear={currentYear}
           setCurrentYear={setCurrentYear}
           totalExpense={totalExpense}
+          setSearchDate={setsearchDate}
         />
 
         {filteredExpenses.map((expense) => (

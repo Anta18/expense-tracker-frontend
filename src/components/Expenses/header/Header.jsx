@@ -3,6 +3,7 @@ import React from "react";
 import AddExpenseButton from "./AddExpenseButton";
 import FilterMonth from "./FilterMonth";
 import FilterYear from "./FilterYear";
+import FilterDate from "./FilterDate";
 
 const Header = ({
   setShowForm,
@@ -12,6 +13,7 @@ const Header = ({
   setCurrentYear,
   currentYear,
   totalExpense,
+  setSearchDate,
 }) => {
   return (
     <Stack
@@ -19,9 +21,10 @@ const Header = ({
       justify="space-between"
     >
       <Text fontWeight="bold" fontSize="xl" color="red" margin={4}>
-        Monthly Expense: ₹{totalExpense}
+        Total Expense: ₹{totalExpense}
       </Text>
       <HStack>
+        <FilterDate setSearchDate={setSearchDate} />
         <FilterMonth
           currentMonth={currentMonth}
           setCurrentMonth={setCurrentMonth}
