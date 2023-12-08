@@ -66,7 +66,6 @@ const Signup = () => {
         </Text>
         <Input
           mb={5}
-          width={500}
           borderRadius={20}
           placeholder="Name"
           variant="filled"
@@ -80,7 +79,6 @@ const Signup = () => {
         </Text>
         <Input
           mb={5}
-          width={500}
           borderRadius={20}
           placeholder="Email"
           variant="filled"
@@ -94,7 +92,6 @@ const Signup = () => {
           Password:
         </Text>
         <Input
-          width={500}
           borderRadius={20}
           placeholder="Password"
           variant="filled"
@@ -111,8 +108,8 @@ const Signup = () => {
             mb={4}
             onClick={handlesignup}
             isLoading={isCreating}
-            loadingText="Creating..."
-            isDisabled={!email || !password}
+            loadingText="Signing Up..."
+            isDisabled={!email || !password || !name}
             bg="#560909"
             color="white"
           >

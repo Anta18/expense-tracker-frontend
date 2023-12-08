@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,19 @@ const ExpenseForm = ({ onClick }) => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
+  useEffect(() => {
+    const getCurrentDate = () => {
+      const today = new Date();
+      const dd = String(today.getDate()).padStart(2, "0");
+      const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+      const yyyy = today.getFullYear();
+
+      setDate(`${dd}-${mm}-${yyyy}`);
+    };
+
+    getCurrentDate();
+  }, []);
+
   const HandleClick = async () => {
     try {
       const response = await axios.post(
@@ -35,7 +48,6 @@ const ExpenseForm = ({ onClick }) => {
 
       setTitle("");
       setAmount("");
-      setDate("");
     } catch (error) {
       console.error("There was a problem with the axios operation:", error);
     }
@@ -44,7 +56,7 @@ const ExpenseForm = ({ onClick }) => {
   return (
     <Center>
       <Box
-        paddingTop={5}
+        marginTop={2}
         bg="#a892ee"
         borderRadius={15}
         borderWidth="1px"
