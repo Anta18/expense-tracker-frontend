@@ -10,6 +10,7 @@ const FilterDate = ({ setSearchDate }) => {
       placeholder="Date"
       variant="filled"
       color="#AB9696"
+      maxWidth={20}
       onChange={() => {
         setSearchDate(ref.current.value.trim());
       }}

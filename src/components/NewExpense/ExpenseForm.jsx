@@ -164,7 +164,10 @@ const ExpenseForm = ({ onClick }) => {
             mt={8}
             mb={4}
             onClick={HandleClick}
-            _active={{ bg: "#560909", color: "white" }}
+            bg="#560909"
+            color="white"
+            _active={{ bg: "white" }}
+            _hover={{ bg: "#560909", color: "white" }}
           >
             Add Expense
           </Button>

@@ -6,7 +6,10 @@ const AddExpenseButton = ({ setShowForm, showForm }) => {
     <Button
       mt={4}
       mb={4}
-      _active={{ bg: "#560909", color: "white" }}
+      bg="#560909"
+      color="white"
+      _active={{ bg: "white" }}
+      _hover={{ bg: "#560909", color: "white" }}
       onClick={() => {
         setShowForm(!showForm);
       }}
