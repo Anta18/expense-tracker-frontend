@@ -164,9 +164,7 @@ const ExpenseForm = ({ onClick }) => {
             mt={8}
             mb={4}
             onClick={HandleClick}
-            loadingText="Adding..."
-            bg="#560909"
-            color="white"
+            _active={{ bg: "#560909", color: "white" }}
           >
             Add Expense
           </Button>

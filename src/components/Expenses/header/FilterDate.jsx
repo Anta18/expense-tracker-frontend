@@ -9,6 +9,7 @@ const FilterDate = ({ setSearchDate }) => {
       borderRadius={20}
       placeholder="Date"
       variant="filled"
+      color="#AB9696"
       onChange={() => {
         setSearchDate(ref.current.value.trim());
       }}
