@@ -48,7 +48,7 @@ const ExpenseForm = ({ onClick }) => {
         borderRadius={15}
         borderWidth="1px"
         padding={2}
-        width="95%"
+        width={{ base: "98vw", md: "95vw", lg: "70vw" }}
         alignItems="center"
         justifyContent="center"
       >
@@ -57,12 +57,22 @@ const ExpenseForm = ({ onClick }) => {
             Add Expense
           </Text>
         </HStack>
-        <HStack justifyContent={"center"} alignItems="center" marginBottom={5}>
-          <Text fontWeight="bold" color="black" fontSize="xl" paddingBottom={5}>
+        <Stack
+          justifyContent={"center"}
+          alignItems="center"
+          marginBottom={5}
+          direction={{ base: "column", md: "row", lg: "row" }}
+        >
+          <Text
+            fontWeight="bold"
+            color="black"
+            fontSize="xl"
+            paddingBottom={{ base: 2, md: 5, lg: 5 }}
+          >
             Title:
           </Text>
           <Input
-            mb={5}
+            mb={{ base: 2, md: 5, lg: 5 }}
             borderRadius={10}
             width="50%"
             bgColor={"white"}
@@ -73,19 +83,24 @@ const ExpenseForm = ({ onClick }) => {
               setTitle(e.target.value);
             }}
           />
-        </HStack>
+        </Stack>
         <Stack
           justifyContent={"center"}
           alignItems="center"
           direction={{ base: "column", md: "row", lg: "row" }}
         >
-          <Text fontWeight="bold" color="black" fontSize="xl" paddingBottom={5}>
+          <Text
+            fontWeight="bold"
+            color="black"
+            fontSize="xl"
+            paddingBottom={{ base: 2, md: 5, lg: 5 }}
+          >
             Amount(Rs.):
           </Text>
           <Input
-            mb={5}
+            mb={{ base: 2, md: 5, lg: 5 }}
             borderRadius={10}
-            width="15%"
+            width={{ base: "40%", md: "15%", lg: "15%" }}
             bgColor={"white"}
             color="black"
             type="number"
@@ -96,13 +111,18 @@ const ExpenseForm = ({ onClick }) => {
               setAmount(parseInt(e.target.value));
             }}
           />
-          <Text fontWeight="bold" color="black" fontSize="xl" paddingBottom={5}>
+          <Text
+            fontWeight="bold"
+            color="black"
+            fontSize="xl"
+            paddingBottom={{ base: 2, md: 5, lg: 5 }}
+          >
             Date:
           </Text>
           <Input
-            mb={5}
+            mb={{ base: 2, md: 5, lg: 5 }}
             borderRadius={10}
-            width="15%"
+            width={{ base: "40%", md: "15%", lg: "15%" }}
             bgColor={"white"}
             color="black"
             type="date"

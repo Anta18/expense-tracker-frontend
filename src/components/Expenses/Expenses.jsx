@@ -72,7 +72,13 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
   }, [filteredExpenses]);
   return (
     <Center>
-      <Box bg="#1f1f1f" width="95%" borderRadius={15} padding={5} margin={5}>
+      <Box
+        bg="#1f1f1f"
+        width={{ base: "98vw", md: "95vw", lg: "95vw" }}
+        borderRadius={15}
+        padding={5}
+        margin={5}
+      >
         <Header
           showForm={showForm}
           setShowForm={setShowForm}

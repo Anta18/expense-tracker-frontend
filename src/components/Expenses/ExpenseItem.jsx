@@ -8,7 +8,7 @@ const ExpenseItem = ({ date, month, title, amount }) => {
         align="center"
         justifyContent="center"
         bg="#4b4b4b"
-        width="70vw"
+        width={{ base: "95vw", md: "95vw", lg: "70vw" }}
         borderRadius={15}
         paddingX={15}
         paddingY={2}
