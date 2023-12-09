@@ -36,9 +36,10 @@ const Signup = () => {
       setIsCreating(false);
       if (token) {
         navigate("/home");
+      } else {
+        throw new Error("Signup Failed");
       }
     } catch (error) {
-      console.error("Signup failed");
       setError("Signup failed");
       setIsCreating(false);
     }
@@ -111,12 +112,17 @@ const Signup = () => {
             loadingText="Signing Up..."
             isDisabled={!email || !password || !name}
             bg="#560909"
+            _hover={{ bg: "#560909" }}
             color="white"
           >
             Signup
           </Button>
         </HStack>
-        {error && <Text color="red.500">{error}</Text>}
+        {error && (
+          <Text color="red.500" mb={3} fontWeight="bold">
+            {error}
+          </Text>
+        )}
         {
           <Link color="blue.300" as={RouterLink} to="/">
             Already have an account? Login now

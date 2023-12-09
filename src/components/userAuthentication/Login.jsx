@@ -30,14 +30,15 @@ const Login = () => {
       console.log("Login successful:", response.data);
       localStorage.setItem("token", response.data.token);
       const token = localStorage.getItem("token");
-      console.log(token);
       setIsCreating(false);
       if (response.data.token) {
         navigate("/home");
+      } else {
+        throw new Error("Login Failed");
       }
     } catch (error) {
       console.error(error);
-      setError(error);
+      setError("Login Failed");
       setIsCreating(false);
     }
   };
@@ -94,6 +95,7 @@ const Login = () => {
             onClick={handlelogin}
             isLoading={isCreating}
             bg="#560909"
+            _hover={{ bg: "#560909" }}
             loadingText="Logging in..."
             isDisabled={!email || !password}
             color="white"
@@ -101,7 +103,11 @@ const Login = () => {
             Login
           </Button>
         </HStack>
-        {error && <Text color="red.500">{error}</Text>}
+        {error && (
+          <Text color="red.500" mb={3} fontWeight="bold">
+            {error}
+          </Text>
+        )}
         {
           <Link color="blue.300" as={RouterLink} to="/signup">
             Don't have an account? Signup now
