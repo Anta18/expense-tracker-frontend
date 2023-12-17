@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ExpenseItem from "./ExpenseItem";
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Box, Center, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
 import Header from "./header/Header";
 
@@ -16,20 +16,38 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
 
   const fetchExpenses = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${backendUrl}/expense`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setExpenses(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("There was a problem with the axios operation:", error);
+      setError(error.code);
+      setLoading(false);
     }
     setTriggerFetch(false);
   };
   useEffect(() => {
     fetchExpenses();
   }, [triggerFetch]);
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`${backendUrl}/expense/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setTriggerFetch(true);
+    } catch (error) {
+      console.error("There was a problem with the axios operation:", error);
+      setError(error.code);
+    }
+  };
 
   const months = [
     "January",
@@ -107,14 +125,29 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
           setSearchDate={setsearchDate}
         />
 
-        {filteredExpenses.map((expense) => (
-          <ExpenseItem
-            date={expense.date.split("-")[0]}
-            amount={expense.amount}
-            title={expense.title}
-            month={months[parseInt(expense.date.split("-")[1]) - 1]}
-          />
-        ))}
+        {loading ? (
+          <Spinner />
+        ) : error ? (
+          <>
+            <Text color="red.500" margin={3} fontWeight="bold">
+              {error}
+            </Text>
+            <Text color="red.500">
+              PLEASE CHECK YOUR NETWORK CONNECTION AND TRY AGAIN
+            </Text>
+          </>
+        ) : (
+          filteredExpenses.map((expense) => (
+            <ExpenseItem
+              date={expense.date.split("-")[0]}
+              amount={expense.amount}
+              title={expense.title}
+              month={months[parseInt(expense.date.split("-")[1]) - 1]}
+              id={expense._id}
+              handleDelete={handleDelete}
+            />
+          ))
+        )}
       </Box>
     </Center>
   );

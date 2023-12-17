@@ -1,9 +1,14 @@
-import { Box, Center, HStack, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import { Box, Center, HStack, Text, IconButton } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import React, { useState } from "react";
 
-const ExpenseItem = ({ date, month, title, amount }) => {
+const ExpenseItem = ({ date, month, title, amount, id, handleDelete }) => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <Center>
+    <Center
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <HStack
         align="center"
         justifyContent="center"
@@ -13,6 +18,7 @@ const ExpenseItem = ({ date, month, title, amount }) => {
         paddingX={15}
         paddingY={2}
         marginY={1}
+        onTouchStart={() => setIsHovered(!isHovered)}
       >
         <Box
           bg="#2a2a2a"
@@ -49,6 +55,18 @@ const ExpenseItem = ({ date, month, title, amount }) => {
           </Text>
         </Box>
       </HStack>
+      {isHovered && (
+        <IconButton
+          icon={<DeleteIcon />}
+          aria-label="Delete"
+          variant="ghost"
+          color="red.500"
+          onClick={() => {
+            handleDelete(id);
+            setIsHovered(false);
+          }}
+        />
+      )}
     </Center>
   );
 };
