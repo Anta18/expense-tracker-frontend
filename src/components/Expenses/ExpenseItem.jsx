@@ -7,7 +7,8 @@ const ExpenseItem = ({ date, month, title, amount, id, handleDelete }) => {
   const touchTimerRef = useRef(null);
 
   const handleTouchStart = () => {
-    if (touchTimerRef.current) {
+    if (touchTimerRef.current && touchTimerRef.current < 90) {
+      console.log(touchTimerRef.current);
       clearTimeout(touchTimerRef.current);
       touchTimerRef.current = null;
       console.log("2nd click");
