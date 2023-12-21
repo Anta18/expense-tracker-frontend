@@ -36,16 +36,21 @@ const Expenses = ({ triggerFetch, setTriggerFetch, setShowForm, showForm }) => {
   }, [triggerFetch]);
 
   const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(`${backendUrl}/expense/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTriggerFetch(true);
-    } catch (error) {
-      console.error("There was a problem with the axios operation:", error);
-      setError(error.code);
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (isConfirmed) {
+      try {
+        const response = await axios.delete(`${backendUrl}/expense/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setTriggerFetch(true);
+      } catch (error) {
+        console.error("There was a problem with the axios operation:", error);
+        setError(error.code);
+      }
     }
   };
 

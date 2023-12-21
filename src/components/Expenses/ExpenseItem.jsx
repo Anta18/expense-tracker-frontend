@@ -1,13 +1,28 @@
 import { Box, Center, HStack, Text, IconButton } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const ExpenseItem = ({ date, month, title, amount, id, handleDelete }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const touchTimerRef = useRef(null);
+
+  const handleTouchStart = () => {
+    if (touchTimerRef.current) {
+      clearTimeout(touchTimerRef.current);
+      touchTimerRef.current = null;
+      console.log("2nd click");
+      setIsHovered(!isHovered);
+    } else {
+      touchTimerRef.current = setTimeout(() => {
+        console.log("1st click");
+      }, 300);
+    }
+  };
   return (
     <Center
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onDoubleClick={() => {
+        setIsHovered(!isHovered);
+      }}
     >
       <HStack
         align="center"
@@ -18,7 +33,13 @@ const ExpenseItem = ({ date, month, title, amount, id, handleDelete }) => {
         paddingX={15}
         paddingY={2}
         marginY={1}
-        onTouchStart={() => setIsHovered(!isHovered)}
+        onTouchStart={handleTouchStart}
+        // onTouchEnd={() => {
+        //   if (touchTimerRef.current) {
+        //     clearTimeout(touchTimerRef.current);
+        //     touchTimerRef.current = null;
+        //   }
+        // }}
       >
         <Box
           bg="#2a2a2a"
